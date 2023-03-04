@@ -9,7 +9,7 @@ class SearchPart extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 34),
       child: TextField(
-        onTapOutside: (event) => FocusScope.of(context).unfocus(),
+        autofocus: false,
         decoration: const InputDecoration(
           hintText: 'Search for News',
           hintStyle: TextStyle(fontWeight: FontWeight.w600),
@@ -17,7 +17,13 @@ class SearchPart extends StatelessWidget {
           focusedBorder: UnderlineInputBorder(borderSide: BorderSide(width: 2)),
           suffixIcon: Icon(Icons.search),
         ),
-        onTap: () => Navigator.pushNamed(context, SearchScreen.routeName),
+        onTap: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const SearchScreen(),
+              ));
+        },
       ),
     );
   }

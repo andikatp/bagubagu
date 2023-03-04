@@ -1,13 +1,12 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:news_app/blocs/data_bloc.dart';
 import 'package:news_app/constants/color.dart';
 import 'package:news_app/constants/model_constant.dart';
 
 class CategoriesPart extends StatefulWidget {
-  final Function(String) onCategorySelected;
-  const CategoriesPart(
-    this.onCategorySelected, {
+  const CategoriesPart({
     Key? key,
   }) : super(key: key);
 
@@ -35,7 +34,11 @@ class _CategoriesPartState extends State<CategoriesPart> {
               GestureDetector(
                 onTap: () {
                   setState(() => i = index);
-                  widget.onCategorySelected(listCategory[i]);
+                  listCategory[i] == 'all'
+                      ? context.read<DataBloc>().getAllNews()
+                      : context
+                          .read<DataBloc>()
+                          .getCategoryNews(listCategory[i]);
                 },
                 child: Container(
                   height: 60,

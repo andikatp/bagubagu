@@ -1,82 +1,61 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:news_app/blocs/data_bloc.dart';
 import 'package:news_app/models/data_model.dart';
+import 'package:news_app/widgets/container_with_news.dart';
 
-class BottomPart extends StatelessWidget {
-  final List<Articles> data;
-  const BottomPart(this.data, {super.key});
+class BottomPart extends StatefulWidget {
+  const BottomPart({super.key});
+
+  @override
+  State<BottomPart> createState() => _BottomPartState();
+}
+
+class _BottomPartState extends State<BottomPart> {
+  List<Articles> _currentArticles = [];
+
+  @override
+  void initState() {
+    context.read<DataBloc>().getAllNews();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 34),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            'Featured Stories',
-            style: TextStyle(fontWeight: FontWeight.w600, fontSize: 22),
-          ),
-          ...List.generate(
-            data.take(20).length,
-            (index) => Container(
-              margin: const EdgeInsets.symmetric(vertical: 10),
-              height: 95,
-              width: double.infinity,
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Image.network(
-                    data[index].urlToImage ?? '',
-                    height: 95,
-                    width: 116,
-                    fit: BoxFit.cover,
-                    errorBuilder: (context, error, stackTrace) => Image.asset(
-                      'assets/error.jpg',
-                      height: 95,
-                      width: 116,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  const SizedBox(width: 17),
-                  Expanded(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          data[index].title ?? 'No Title',
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 2,
-                          style: const TextStyle(
-                            fontSize: 22,
-                            fontWeight: FontWeight.w500,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                        const Spacer(),
-                        const Text(
-                          'Read News',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                        const SizedBox(height: 4),
-                        Container(
-                          height: 0,
-                          width: 50,
-                          decoration:
-                              BoxDecoration(border: Border.all(width: 1)),
-                        )
-                      ],
-                    ),
-                  )
-                ],
-              ),
-            ),
-          ),
-        ],
+      child: BlocConsumer<DataBloc, DataState>(
+        listener: (context, state) {
+          if (state is DataAllState) {
+            _currentArticles = state.allArticle;
+          }
+          if (state is DataCategoryState) {
+            _currentArticles = state.categoryArticle;
+          }
+        },
+        builder: (context, state) {
+          if (state is DataLoadingState) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          } else if (state is DataErrorState) {
+            return Center(child: Text(state.message));
+          } else {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  'Featured Stories',
+                  style: TextStyle(fontWeight: FontWeight.w600, fontSize: 22),
+                ),
+                ...List.generate(
+                    _currentArticles.take(30).length,
+                    (index) =>
+                        ContainerWithNews(data: _currentArticles, index: index)),
+              ],
+            );
+          }
+        },
       ),
     );
   }

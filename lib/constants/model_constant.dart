@@ -1,5 +1,5 @@
 const List<String> listCategory = [
-  'All',
+  'all',
   'business',
   'entertainment',
   'general',
