@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../blocs/data_bloc.dart';
 
 class TopPart extends StatefulWidget {
- 
   const TopPart({
     Key? key,
   }) : super(key: key);
@@ -54,7 +53,7 @@ class _TopPartState extends State<TopPart> {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: TextField(
-        autofocus: false,
+        autofocus: true,
         onTapOutside: (event) => FocusScope.of(context).unfocus(),
         decoration: InputDecoration(
           contentPadding: EdgeInsetsDirectional.zero,
@@ -73,8 +72,8 @@ class _TopPartState extends State<TopPart> {
             borderSide: const BorderSide(width: 0.7),
             borderRadius: BorderRadius.circular(30),
           ),
-          suffixIcon:
-              IconButton(icon: const Icon(Icons.tune), onPressed: () => _showSort()),
+          suffixIcon: IconButton(
+              icon: const Icon(Icons.tune), onPressed: () => _showSort()),
         ),
         onChanged: (value) => context.read<DataBloc>().searchData(value),
       ),
