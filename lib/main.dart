@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:news_app/blocs/data_bloc.dart';
 import 'package:news_app/constants/color.dart';
+import 'package:news_app/features/detail/screen/detail_screen.dart';
 import 'package:news_app/features/home/screens/main_screen.dart';
 import 'package:news_app/features/home/screens/splash_screen.dart';
 import 'package:news_app/features/search/screen/search_screen.dart';
@@ -40,6 +41,7 @@ class MyApp extends StatelessWidget {
           '/': (context) => const SplashScreen(),
           MainScreen.routeName: (context) => const MainScreen(),
           SearchScreen.routeName: (context) => const SearchScreen(),
+          DetailScreen.routeName: (context) => const DetailScreen(),
         },
       ),
     );
