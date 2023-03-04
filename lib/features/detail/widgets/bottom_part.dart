@@ -27,12 +27,20 @@ class BottomPart extends StatelessWidget {
           controller: sc,
           children: [
             Row(
+              mainAxisSize: MainAxisSize.min,
               children: [
                 const CircleAvatar(backgroundImage: NetworkImage(dummyFoto)),
                 const SizedBox(width: 10),
-                Text(
-                  article.author ?? 'No Author',
-                  style: const TextStyle(),
+                Flexible(
+                  fit: FlexFit.tight,
+                  child: Text(
+                    article.author ?? 'No Author',
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 3,
+                    style: const TextStyle(
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
                 ),
               ],
             ),
