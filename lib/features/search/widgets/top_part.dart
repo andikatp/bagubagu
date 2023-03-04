@@ -32,14 +32,20 @@ class _TopPartState extends State<TopPart> {
                 height: 50,
                 width: 150,
                 child: OutlinedButton(
-                    onPressed: () => context.read<DataBloc>().sortDate(true),
+                    onPressed: () {
+                      context.read<DataBloc>().sortDate(true);
+                      Navigator.pop(context);
+                    },
                     child: const Text('Most Recent')),
               ),
               SizedBox(
                   height: 50,
                   width: 150,
                   child: OutlinedButton(
-                      onPressed: () => context.read<DataBloc>().sortDate(false),
+                      onPressed: () {
+                        context.read<DataBloc>().sortDate(false);
+                        Navigator.pop(context);
+                      },
                       child: const Text('Oldest'))),
             ]),
           ],

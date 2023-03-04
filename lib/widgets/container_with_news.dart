@@ -35,13 +35,14 @@ class ContainerWithNews extends StatelessWidget {
               fit: BoxFit.cover,
               errorBuilder: (context, error, stackTrace) => Image.asset(
                 'assets/error.jpg',
-                height: 95,
+                height: 97,
                 width: 116,
                 fit: BoxFit.cover,
               ),
             ),
             const SizedBox(width: 17),
-            Expanded(
+            Flexible(
+              fit: FlexFit.tight,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -81,7 +82,7 @@ class ContainerWithNews extends StatelessWidget {
                     height: 0,
                     width: 50,
                     decoration: BoxDecoration(
-                      border: Border.all(width: 1),
+                      border: Border.all(width: 0.5),
                     ),
                   )
                 ],
