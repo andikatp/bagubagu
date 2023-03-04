@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 class DataService {
   DataService._();
 
-  static const String _apiKey = '31c41c0f81014fc48ec68a5f05ba94f0';
+  static const String _apiKey = 'f176499d644c45b89f97e6631cb10de9';
 
   static Future<List<Articles>> getAllNews() async {
     const String url =
@@ -23,13 +23,13 @@ class DataService {
               'Data tidak ditemukan ${response.reasonPhrase}');
       }
     } catch (e) {
-      throw FetchErrorMessage('$e');
+      throw FetchErrorMessage('Cek API');
     }
   }
 
   static Future<List<Articles>> getNewsCategories(String categories) async {
-    const String url =
-        'https://newsapi.org/v2/top-headlines?country=id&category=business&apiKey=$_apiKey';
+    String url =
+        'https://newsapi.org/v2/top-headlines?country=id&category=$categories&apiKey=$_apiKey';
     http.Response response = await http.get(Uri.parse(url));
     try {
       switch (response.statusCode) {

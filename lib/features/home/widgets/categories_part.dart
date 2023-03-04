@@ -1,9 +1,22 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+
 import 'package:news_app/constants/color.dart';
 import 'package:news_app/constants/model_constant.dart';
 
-class CategoriesPart extends StatelessWidget {
-  const CategoriesPart({super.key});
+class CategoriesPart extends StatefulWidget {
+  final Function(String) onCategorySelected;
+  const CategoriesPart(
+    this.onCategorySelected, {
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  State<CategoriesPart> createState() => _CategoriesPartState();
+}
+
+class _CategoriesPartState extends State<CategoriesPart> {
+  int i = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -19,16 +32,22 @@ class CategoriesPart extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           itemBuilder: (context, index) => Column(
             children: [
-              Container(
-                height: 60,
-                width: 60,
-                decoration: const BoxDecoration(
-                  color: primary,
-                  shape: BoxShape.circle,
-                ),
-                child: const Icon(
-                  Icons.deblur,
-                  color: Colors.white,
+              GestureDetector(
+                onTap: () {
+                  setState(() => i = index);
+                  widget.onCategorySelected(listCategory[i]);
+                },
+                child: Container(
+                  height: 60,
+                  width: 60,
+                  decoration: BoxDecoration(
+                    color: index == i ? primary : secondary,
+                    shape: BoxShape.circle,
+                  ),
+                  child: const Icon(
+                    Icons.deblur,
+                    color: Colors.white,
+                  ),
                 ),
               ),
               const SizedBox(height: 10),

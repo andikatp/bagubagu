@@ -4,8 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:news_app/blocs/data_bloc.dart';
 import 'package:news_app/constants/color.dart';
-import 'package:news_app/features/home/screen/main_screen.dart';
-import 'package:news_app/features/home/screen/splash_screen.dart';
+import 'package:news_app/features/home/screens/main_screen.dart';
+import 'package:news_app/features/home/screens/splash_screen.dart';
+import 'package:news_app/features/search/screen/search_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -27,14 +28,18 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
-        theme: ThemeData(fontFamily: GoogleFonts.roboto().fontFamily).copyWith(
+        theme: ThemeData().copyWith(
+          textTheme: ThemeData()
+              .textTheme
+              .apply(fontFamily: GoogleFonts.roboto().fontFamily),
           colorScheme: Theme.of(context).colorScheme.copyWith(primary: primary),
         ),
         debugShowCheckedModeBanner: false,
-        initialRoute: MainScreen.routeName,
+        initialRoute: '/',
         routes: {
           '/': (context) => const SplashScreen(),
-          MainScreen.routeName: (context) => const MainScreen()
+          MainScreen.routeName: (context) => const MainScreen(),
+          SearchScreen.routeName: (context) => const SearchScreen(),
         },
       ),
     );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/features/search/screen/search_screen.dart';
 
 class SearchPart extends StatelessWidget {
   const SearchPart({super.key});
@@ -16,6 +17,7 @@ class SearchPart extends StatelessWidget {
           focusedBorder: UnderlineInputBorder(borderSide: BorderSide(width: 2)),
           suffixIcon: Icon(Icons.search),
         ),
+        onTap: () => Navigator.pushNamed(context, SearchScreen.routeName),
       ),
     );
   }

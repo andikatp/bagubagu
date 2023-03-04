@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/models/data_model.dart';
 
 class BottomPart extends StatelessWidget {
-  final state;
-  const BottomPart(this.state, {super.key});
+  final List<Articles> data;
+  const BottomPart(this.data, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,15 +17,16 @@ class BottomPart extends StatelessWidget {
             style: TextStyle(fontWeight: FontWeight.w600, fontSize: 22),
           ),
           ...List.generate(
-            20,
+            data.take(20).length,
             (index) => Container(
               margin: const EdgeInsets.symmetric(vertical: 10),
               height: 95,
               width: double.infinity,
               child: Row(
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   Image.network(
-                    state.data[index].urlToImage ?? '',
+                    data[index].urlToImage ?? '',
                     height: 95,
                     width: 116,
                     fit: BoxFit.cover,
@@ -36,14 +38,13 @@ class BottomPart extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(width: 17),
-                  SizedBox(
-                    width: 180,
+                  Expanded(
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          state.data[index].title ?? 'No Title',
+                          data[index].title ?? 'No Title',
                           overflow: TextOverflow.ellipsis,
                           maxLines: 2,
                           style: const TextStyle(
