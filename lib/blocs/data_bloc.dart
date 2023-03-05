@@ -38,16 +38,19 @@ class DataBloc extends Cubit<DataState> {
 
   Future<void> sortDate(bool newest) async {
     try {
-      final allArticle = await DataService.getAllNews();
-      if (newest) {
-        allArticle.sort(
-          (a, b) => a.publishedAt!.compareTo(b.publishedAt!),
-        );
-      } else {
-        allArticle.sort((a, b) => b.publishedAt!.compareTo(a.publishedAt!));
+      final DataState currentState = state;
+      if (currentState is DataAllState) {
+        final List<Articles> allArticle =
+            List<Articles>.from(currentState.allArticle);
+        if (newest) {
+          allArticle.sort(
+            (a, b) => a.publishedAt!.compareTo(b.publishedAt!),
+          );
+        } else {
+          allArticle.sort((a, b) => b.publishedAt!.compareTo(a.publishedAt!));
+        }
+        emit(DataAllState(allArticle));
       }
-
-      emit(DataAllState(allArticle));
     } on http.Response catch (e) {
       if (e.statusCode == 403) {
         emit(DataErrorState('You are not authorized to access this resource.'));

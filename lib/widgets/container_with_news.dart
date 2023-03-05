@@ -41,8 +41,7 @@ class ContainerWithNews extends StatelessWidget {
               ),
             ),
             const SizedBox(width: 17),
-            Flexible(
-              fit: FlexFit.tight,
+            Expanded(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -60,6 +59,8 @@ class ContainerWithNews extends StatelessWidget {
                   const Spacer(),
                   Text(
                     data[index].author ?? 'No author',
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
                     style: const TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w500,
@@ -84,7 +85,7 @@ class ContainerWithNews extends StatelessWidget {
                     decoration: BoxDecoration(
                       border: Border.all(width: 0.5),
                     ),
-                  )
+                  ),
                 ],
               ),
             )
