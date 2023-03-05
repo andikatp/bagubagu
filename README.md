@@ -1,17 +1,14 @@
-# news_app
+## SIMPLE NEWS APP
 
-A new Flutter project.
+Created for studycase. api use [URL](https://saurav.tech/NewsAPI/top-headlines/category/health/in.json)
 
-## Getting Started
+## TECHNOLOGY
+- http
+- flutter_bloc
+- google_fonts
+- intl
+- sliding_up_panel
 
-This project is a starting point for a Flutter application.
+## DEMO
+![Demo](https://github.com/andikatp/GifTest/blob/main/ezgif-2-db81856c30.gif)
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-# ngetes
